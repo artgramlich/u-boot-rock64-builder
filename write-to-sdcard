@@ -1,0 +1,16 @@
+#!/bin/sh
+if ! [ -f u-boot-rockchip.bin  ]; then
+  echo "ERROR: u-boot-rockchip.bin not found - run make build"
+  exit 1
+fi
+if [ $# -ne 1 ]; then
+  echo "ERROR: Usage $0 /dev/sdX"
+  exit 1
+fi
+SDDEV=$1
+if ! [ -b "$SDDEV" ]; then
+  echo "ERROR: $SDDEV is not a block device"
+fi
+echo "Writing bootloader to $SDDEV"
+sudo dd seek=64 if=u-boot-rockchip.bin of=$SDDEV
+sudo sync
