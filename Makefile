@@ -3,3 +3,4 @@ build:
 
 clean:
 	@rm -f u-boot-rockchip.bin
+
